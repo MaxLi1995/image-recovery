@@ -27,10 +27,12 @@ int main(int argc, char *argv[])
     char file_name[8];
     FILE *output;
     uint8_t block[const_size];
+    //loop over your file 512 btye at a time
     while (fread(block, const_size, 1, file))
     {
         if (block[0] == 0xff && block[1] == 0xd8 && block[2] == 0xff && block[3] >= 0xe0 && block[3] <= 0xef)
         {
+            // if opened then close and start a new output file
             if (opened)
             {
                 fclose(output);
@@ -40,11 +42,13 @@ int main(int argc, char *argv[])
             opened = true;
             i++;
         }
+        //continue writing if already writing
         if (opened)
         {
             fwrite(&block, const_size, 1, output);
         }
     }
+    //close your file and output file
     fclose(file);
     fclose(output);
 }
