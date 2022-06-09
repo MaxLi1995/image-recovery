@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
             {
                 fclose(output);
             }
-            sprintf(file_name, "%03i.jpeg", i);
+            sprintf(file_name, "%03i.jpg", i);
             output = fopen(file_name, "w");
             opened = true;
             i++;
